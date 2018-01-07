@@ -28,11 +28,7 @@ public class OrganizerZadan implements ActionListener {
    JButton b1;
    JButton b2;
        public static void main(String[] args)          
-   {                                               
-      //do wersji 1.4                              
-      //new Demo().init();                         
- 
-      //od wersji 1.5                              
+   {                             
       SwingUtilities.invokeLater(new Runnable()    
       {                                            
          @Override
