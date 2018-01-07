@@ -8,6 +8,7 @@ package zadania;
 /**
  *
  * @author Mateusz
+ * @author MatriX
  */
 public class ListaZadan {
     public static void main(String[] args) {
