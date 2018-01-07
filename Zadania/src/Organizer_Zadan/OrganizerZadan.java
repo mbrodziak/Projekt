@@ -51,9 +51,9 @@ public class OrganizerZadan implements ActionListener {
       GridBagConstraints gbc=new GridBagConstraints();                          
       gbc.fill=GridBagConstraints.HORIZONTAL;                                   
       c.setLayout(gbl); 
-      
+ 
       t1=new JTextField(20);
-      t1.addActionListener(this);
+      t1.addActionListener(this);                       
       t1.setFocusable(false);                         
       gbc.gridx=0;                                                              
       gbc.gridy=0;                                                              
@@ -76,7 +76,7 @@ public class OrganizerZadan implements ActionListener {
       c.add(t2);  
       
       b1=new JButton("ADD");
-      b1.addActionListener(this);
+      b1.addActionListener(this);                       
       b1.setFocusable(false);                                                   
       gbc.gridx=1;                                                              
       gbc.gridy=0;                                                              
@@ -88,7 +88,7 @@ public class OrganizerZadan implements ActionListener {
       c.add(b1);  
       
       b2=new JButton("DELETE");
-      b2.addActionListener(this);
+      b2.addActionListener(this);                       
       b1.setFocusable(false);                                                   
       gbc.gridx=2;                                                              
       gbc.gridy=0;                                                              
@@ -98,9 +98,9 @@ public class OrganizerZadan implements ActionListener {
       gbc.insets=new Insets(5,5,5,5);                                           
       gbl.setConstraints(b2,gbc);                                               
       c.add(b2);  
-                                                                                  
+ 
       f.pack();                                         
-      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
       f.setTitle("Organizer Zadan");
       f.setVisible(true); 
     }
