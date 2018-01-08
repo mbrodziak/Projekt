@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -29,14 +28,7 @@ public class OrganizerZadan implements ActionListener {
    JButton b2;
        public static void main(String[] args)          
    {                             
-      SwingUtilities.invokeLater(new Runnable()    
-      {                                            
-         @Override
-         public void run()                         
-         {                                         
-            new OrganizerZadan().init();                     
-         }                                         
-      });                                          
+      SwingUtilities.invokeLater(new OrganizerZadan()::init);                                          
    }      
 
     private void init() {
