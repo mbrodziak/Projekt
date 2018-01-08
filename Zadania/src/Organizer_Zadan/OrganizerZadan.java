@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -25,13 +24,9 @@ public class OrganizerZadan implements ActionListener {
    JTextField t1;
    JTextArea t2;
    JButton b1;
-   JButton b2;
-       public static void main(String[] args)          
-   {                             
-      SwingUtilities.invokeLater(new OrganizerZadan()::init);                                          
-   }      
+   JButton b2;    
 
-    private void init() {
+    public void init() {
       JFrame f=new JFrame();                            
       Container c=f.getContentPane();
       
