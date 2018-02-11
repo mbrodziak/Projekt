@@ -16,71 +16,90 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
 /**
  *
- * @author MatriX
+ *
  */
 public class OrganizerZadan implements ActionListener {
-   JTextField t1;
-   JTextArea t2;
-   JButton b1;
-   JButton b2;    
+   JTextField Pole;
+   JTextArea Pole2;
+   JButton Przycisk;
+   JButton Przycisk2;
+   JButton Przycisk3;
+
 
     public void init() {
-      JFrame f=new JFrame();                            
-      Container c=f.getContentPane();
+      JFrame f = new JFrame();                            
+      Container c = f.getContentPane();
       
-      GridBagLayout gbl=new GridBagLayout();                                    
-      GridBagConstraints gbc=new GridBagConstraints();                          
-      gbc.fill=GridBagConstraints.HORIZONTAL;                                   
+      GridBagLayout gbl = new GridBagLayout();                                    
+      GridBagConstraints gbc = new GridBagConstraints();                          
+      gbc.fill = GridBagConstraints.HORIZONTAL;                                   
       c.setLayout(gbl); 
+      
+      
  
-      t1=new JTextField(20);
-      t1.addActionListener(this);                       
-      t1.setFocusable(false);                         
-      gbc.gridx=0;                                                              
-      gbc.gridy=0;                                                              
-      gbc.gridwidth=1;                                                          
-      gbc.ipadx=0;                                                              
-      gbc.ipady=0;                                                              
-      gbc.insets=new Insets(5,5,0,5);                                           
-      gbl.setConstraints(t1,gbc);                                               
-      c.add(t1);  
+      Pole = new JTextField(20);
+      Pole.addActionListener(this);                       
+      Pole.setFocusable(false);                         
+      gbc.gridx = 0;                                                              
+      gbc.gridy = 0;                                                              
+      gbc.gridwidth = 1;                                                          
+      gbc.ipadx = 0;                                                              
+      gbc.ipady = 0;                                                              
+      gbc.insets = new Insets(5,5,0,0);                                           
+      gbl.setConstraints(Pole, gbc);                                               
+      c.add(Pole);  
       
-      t2=new JTextArea(20,20);
-      t2.setFocusable(false);                                                   
-      gbc.gridx=0;                                                              
-      gbc.gridy=1;                                                              
-      gbc.gridwidth=1;                                                          
-      gbc.ipadx=0;                                                              
-      gbc.ipady=0;                                                              
-      gbc.insets=new Insets(5,5,0,0);                                           
-      gbl.setConstraints(t2,gbc);                                               
-      c.add(t2);  
+      Pole2 = new JTextArea(20,20);
+      Pole2.setFocusable(false);                                                   
+      gbc.gridx = 0;                                                              
+      gbc.gridy = 1;                                                              
+      gbc.gridwidth = 1;                                                          
+      gbc.ipadx = 0;                                                              
+      gbc.ipady = 0;                                                              
+      gbc.insets = new Insets(5,5,0,0);                                           
+      gbl.setConstraints(Pole2, gbc);                                               
+      c.add(Pole2);  
       
-      b1=new JButton("ADD");
-      b1.addActionListener(this);                       
-      b1.setFocusable(false);                                                   
-      gbc.gridx=1;                                                              
-      gbc.gridy=0;                                                              
-      gbc.gridwidth=1;                                                          
-      gbc.ipadx=0;                                                              
-      gbc.ipady=0;                                                              
-      gbc.insets=new Insets(5,5,5,0);                                           
-      gbl.setConstraints(b1,gbc);                                               
-      c.add(b1);  
+      Przycisk = new JButton("ADD");
+      Przycisk.addActionListener(this);                       
+      Przycisk.setFocusable(false);                                                   
+      gbc.gridx = 1;                                                              
+      gbc.gridy = 0;                                                              
+      gbc.gridwidth = 1;                                                          
+      gbc.ipadx = 0;                                                              
+      gbc.ipady = 0;                                                              
+      gbc.insets = new Insets(5,5,5,0);                                           
+      gbl.setConstraints(Przycisk, gbc);                                               
+      c.add(Przycisk);  
       
-      b2=new JButton("DELETE");
-      b2.addActionListener(this);                       
-      b1.setFocusable(false);                                                   
-      gbc.gridx=2;                                                              
-      gbc.gridy=0;                                                              
-      gbc.gridwidth=1;                                                          
-      gbc.ipadx=0;                                                              
-      gbc.ipady=0;                                                              
-      gbc.insets=new Insets(5,5,5,5);                                           
-      gbl.setConstraints(b2,gbc);                                               
-      c.add(b2);  
+      Przycisk2 = new JButton("DELETE");
+      Przycisk2.addActionListener(this);                       
+      Przycisk2.setFocusable(false);                                                   
+      gbc.gridx = 2;                                                              
+      gbc.gridy = 0;                                                              
+      gbc.gridwidth = 1;                                                          
+      gbc.ipadx = 0;                                                              
+      gbc.ipady = 0;                                                              
+      gbc.insets = new Insets(5,5,5,5);                                           
+      gbl.setConstraints(Przycisk2, gbc);                                               
+      c.add(Przycisk2);
+      
+      Przycisk3 = new JButton("Back");
+      Przycisk3.addActionListener(this);
+      Przycisk3.setFocusable(false);
+      gbc.gridx = 3;
+      gbc.gridy = 0;
+      gbc.gridwidth = 1;
+      gbc.ipadx = 0;
+      gbc.ipady = 0;
+      gbc.insets = new Insets(5,5,5,5);
+      gbl.setConstraints(Przycisk3, gbc); 
+      c.add(Przycisk3);
+      
+      
  
       f.pack();                                         
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
