@@ -4,15 +4,14 @@
  * and open the template in the editor.
  */
 package Organizer_Zadan;
-
-import javax.swing.SwingUtilities;
-
 /**
  *
  * @author student
  */
 public class Main {
     public static void main(String[] args) {         
-        SwingUtilities.invokeLater(new OrganizerZadan()::init);
+        java.awt.EventQueue.invokeLater(() -> {
+            new OrganizerZadan().setVisible(true);
+        });
     }
 }
