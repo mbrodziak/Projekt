@@ -85,6 +85,11 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
         DeleteButton.setText("Delete");
         DeleteButton.setActionCommand("DeleteButton");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +154,12 @@ public class OrganizerZadan extends javax.swing.JFrame {
         model.removeRow(ROW);
         model.insertRow(ROW,new Object[]{date,WhereField.getText(),WhatField.getText()});
     }//GEN-LAST:event_ModifyButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        int ROW = jTable1.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(ROW);
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
