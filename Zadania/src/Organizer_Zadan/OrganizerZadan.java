@@ -5,6 +5,9 @@
  */
 package Organizer_Zadan;
 
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MatriX
@@ -14,7 +17,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private static final long serialVersionUID = -4679833238790674239L;
 
     /**
-     * Creates new form OrganizerZadan0
+     * Creates new form OrganizerZadan
      */
     public OrganizerZadan() {
         initComponents();
@@ -74,6 +77,11 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
         ModifyButton.setText("Modify");
         ModifyButton.setActionCommand("ModifyButton");
+        ModifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyButtonActionPerformed(evt);
+            }
+        });
 
         DeleteButton.setText("Delete");
         DeleteButton.setActionCommand("DeleteButton");
@@ -127,8 +135,15 @@ public class OrganizerZadan extends javax.swing.JFrame {
     }//GEN-LAST:event_WhereFieldActionPerformed
 
     private void ADDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDButtonActionPerformed
-        // TODO add your handling code here:
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dFormat.format(jDateChooser.getDate());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{date,WhereField.getText(),WhatField.getText()});
     }//GEN-LAST:event_ADDButtonActionPerformed
+
+    private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModifyButtonActionPerformed
 
     /**
      * @param args the command line arguments
