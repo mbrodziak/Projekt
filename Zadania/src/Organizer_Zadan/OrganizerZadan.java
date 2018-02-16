@@ -142,7 +142,12 @@ public class OrganizerZadan extends javax.swing.JFrame {
     }//GEN-LAST:event_ADDButtonActionPerformed
 
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
-        // TODO add your handling code here:
+        SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dFormat.format(jDateChooser.getDate());
+        int ROW = jTable1.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(ROW);
+        model.insertRow(ROW,new Object[]{date,WhereField.getText(),WhatField.getText()});
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
     /**
