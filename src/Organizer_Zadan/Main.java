@@ -5,14 +5,15 @@
  */
 package Organizer_Zadan;
 
-import javax.swing.SwingUtilities;
-
 /**
  *
  * @author student
  */
 public class Main {
-    public static void main(String[] args) {         
-        SwingUtilities.invokeLater(new OrganizerZadan()::init);
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new OrganizerZadan().setVisible(true);
+        });
     }
 }
