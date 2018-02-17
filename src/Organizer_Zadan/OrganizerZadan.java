@@ -143,7 +143,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dFormat.format(jDateChooser.getDate());
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{date,WhereField.getText(),WhatField.getText()});
+        model.addRow(new Object[]{date, WhereField.getText(), WhatField.getText()});
     }//GEN-LAST:event_ADDButtonActionPerformed
 
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
@@ -152,7 +152,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         int ROW = jTable1.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.removeRow(ROW);
-        model.insertRow(ROW,new Object[]{date,WhereField.getText(),WhatField.getText()});
+        model.insertRow(ROW, new Object[]{date, WhereField.getText(), WhatField.getText()});
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -161,9 +161,6 @@ public class OrganizerZadan extends javax.swing.JFrame {
         model.removeRow(ROW);
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
     private javax.swing.JButton DeleteButton;
