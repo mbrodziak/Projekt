@@ -161,9 +161,6 @@ public class OrganizerZadan extends javax.swing.JFrame {
         model.removeRow(ROW);
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
     private javax.swing.JButton DeleteButton;
