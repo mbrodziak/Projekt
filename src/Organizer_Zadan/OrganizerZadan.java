@@ -5,16 +5,9 @@
  */
 package Organizer_Zadan;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 
@@ -200,65 +193,20 @@ public class OrganizerZadan extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String date = dFormat.format(jDateChooser.getDate());
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         try {
-            Zapis();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            SaveLoadSystem.save(model);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(OrganizerZadan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
         try {
-            Odczyt();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(OrganizerZadan.class.getName()).log(Level.SEVERE, null, ex);
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            SaveLoadSystem.load(model);
         } catch (IOException ex) {
-            Logger.getLogger(OrganizerZadan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_LoadActionPerformed
-
-    private void Zapis() throws FileNotFoundException{
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int ile = model.getRowCount();
-        int ilecol = model.getColumnCount();
-        try(PrintWriter zapis = new PrintWriter("user.save")) {
-            for (int i = 0; i < ile; i++){
-                zapis.print(model.getValueAt(i, 0));
-                zapis.print(", ");
-                zapis.print(model.getValueAt(i, 1));
-                zapis.print(", ");
-                zapis.print(model.getValueAt(i, 2));
-                zapis.print(", ");
-                if(model.getValueAt(i, 3) == null){
-                    model.setValueAt(false, i, 3);
-                }
-                zapis.println(model.getValueAt(i, 3));
-                }
-             zapis.print("#");
-             zapis.close();
-        }
-    }
-    
-    private void Odczyt() throws FileNotFoundException, IOException{
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        BufferedReader in = new BufferedReader(new FileReader("user.save"));
-        String czyt = in.readLine();
-        System.out.println(czyt);
-        while(!czyt.equals('#')){
-            String[] podzial = czyt.split(", ");
-            boolean bool = Boolean.parseBoolean(podzial[3]);
-            model.addRow(new Object[]{podzial[0], podzial[1], podzial[2], bool});
-            System.out.println(podzial[0]);
-            System.out.println(podzial[1]);
-            System.out.println(podzial[2]);
-            System.out.println(podzial[3]);
-            czyt = in.readLine();
-            System.out.println(czyt);
-        }
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
