@@ -279,11 +279,17 @@ public class OrganizerZadan extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
+        if (AutoSaveCheckBox.isSelected()) {
+            try {
+                DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+                SaveLoadSystem.load(model);
+            } catch (IOException ex) {
+            }
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println(AutoSaveCheckBox.);
+        System.out.println(AutoSaveCheckBox.isSelected());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
