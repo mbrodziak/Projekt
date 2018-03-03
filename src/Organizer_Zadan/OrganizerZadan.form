@@ -25,18 +25,27 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jDateChooser" pref="178" max="32767" attributes="0"/>
-                  <Component id="WhereField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="WhatField" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="ADDButton" max="32767" attributes="0"/>
-                  <Component id="ModifyButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="DeleteButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="SaveButton" max="32767" attributes="0"/>
-                  <Component id="Load" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jDateChooser" pref="178" max="32767" attributes="0"/>
+                          <Component id="WhereField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="WhatField" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="ADDButton" max="32767" attributes="0"/>
+                          <Component id="ModifyButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="DeleteButton" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SaveButton" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="LoadButton" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="291" max="-2" attributes="0"/>
@@ -49,7 +58,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="401" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jDateChooser" min="-2" max="-2" attributes="0"/>
@@ -65,13 +73,14 @@
                           <Component id="WhatField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="DeleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="LoadButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Load" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" min="-2" pref="401" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,7 +102,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="0">
@@ -169,12 +178,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Load">
+    <Component class="javax.swing.JButton" name="LoadButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Load"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -20,38 +20,35 @@ public class SaveLoadSystem {
 
     public static void save(DefaultTableModel model) throws FileNotFoundException {
         int ile = model.getRowCount();
-        try (PrintWriter zapis = new PrintWriter("user.save")) {
+        try (PrintWriter write = new PrintWriter("user.save")) {
             for (int i = 0; i < ile; i++) {
-                zapis.print(model.getValueAt(i, 0));
-                zapis.print(", ");
-                zapis.print(model.getValueAt(i, 1));
-                zapis.print(", ");
-                zapis.print(model.getValueAt(i, 2));
-                zapis.print(", ");
-                if (model.getValueAt(i, 3) == null) {
-                    model.setValueAt(false, i, 3);
-                }
-                zapis.println(model.getValueAt(i, 3));
+                write.print(model.getValueAt(i, 0));
+                write.print("//");
+                write.print(model.getValueAt(i, 1));
+                write.print("//");
+                write.print(model.getValueAt(i, 2));
+                write.print("//");
+                if (model.getValueAt(i, 3) == null) write.println(false);
+                else write.println(model.getValueAt(i, 3));
             }
-            zapis.print("#");
-            zapis.close();
+            write.print("#%%#");
+            write.close();
         }
     }
 
     public static void load(DefaultTableModel model) throws FileNotFoundException, IOException {
         BufferedReader in = new BufferedReader(new FileReader("user.save"));
-        String czyt = in.readLine();
-        System.out.println(czyt);
-        while (!czyt.equals("#")) {
-            String[] podzial = czyt.split(", ");
-            boolean bool = Boolean.parseBoolean(podzial[3]);
-            model.addRow(new Object[]{podzial[0], podzial[1], podzial[2], bool});
-            System.out.println(podzial[0]);
-            System.out.println(podzial[1]);
-            System.out.println(podzial[2]);
-            System.out.println(podzial[3]);
-            czyt = in.readLine();
-            System.out.println(czyt);
+        removeAll(model);
+        String read = in.readLine();
+        while (!read.equals("#%%#")) {
+            String[] slt = read.split("//");
+            boolean bool = Boolean.parseBoolean(slt[3]);
+            model.addRow(new Object[]{slt[0], slt[1], slt[2], bool});
+            read = in.readLine();
         }
+    }
+
+    private static void removeAll(DefaultTableModel model) {
+        
     }
 }
