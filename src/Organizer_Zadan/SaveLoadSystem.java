@@ -5,15 +5,12 @@
  */
 package Organizer_Zadan;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -32,63 +29,57 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SaveLoadSystem {
 
-    static RSA rsa;
-
     public static void save(DefaultTableModel model) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
-        rsa = new RSA();
         int ile = model.getRowCount();
-        try (PrintWriter write = new PrintWriter("user.save")) {
-            try (ObjectOutputStream outK = new ObjectOutputStream(new FileOutputStream("User.Key"))) {
-                outK.writeObject(RSA.priv);
-                outK.flush();
-            }
+        try (ObjectOutputStream outK = new ObjectOutputStream(new FileOutputStream("User.Key"))) {
+            outK.writeObject(RSA.priv);
+            outK.flush();
+        }
+        try (ObjectOutputStream outO = new ObjectOutputStream(new FileOutputStream("user.save"))) {
             for (int i = 0; i < ile; i++) {
-                write.print(new String((RSA.szyfruj((String) model.getValueAt(i, 0)))));
-                write.print("//");
-                write.print(new String((RSA.szyfruj((String) model.getValueAt(i, 1)))));
-                write.print("//");
-                write.print(new String((RSA.szyfruj((String) model.getValueAt(i, 2)))));
-                write.print("//");
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 0)));
+                outO.writeObject(RSA.ENCRYPTING("//"));
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 1)));
+                outO.writeObject(RSA.ENCRYPTING("//"));
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 2)));
+                outO.writeObject(RSA.ENCRYPTING("//"));
                 if (model.getValueAt(i, 3) == null) {
-                    write.println(false);
+                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString(false)));
                 } else {
-                    write.println(model.getValueAt(i, 3));
-
+                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString((boolean) model.getValueAt(i, 3))));
                 }
-                write.println("%#%#");
-
+                outO.writeObject(RSA.ENCRYPTING("%#%#"));
             }
-            write.println("#%%#");
+            outO.writeObject(RSA.ENCRYPTING("#%%#"));
+            outO.flush();
         }
     }
 
-    public static void load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException{
-        BufferedReader in = new BufferedReader(new FileReader("user.save"));
+    public static void load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
-        ObjectInputStream inK = new ObjectInputStream(new FileInputStream("User.Key"));
-        PrivateKey priv = (PrivateKey) inK.readObject();
-        String read = in.readLine();
-        System.out.println(read);
-        while (!read.equals("#%%#")) {
-            String rd = in.readLine();
-            while (!rd.equals("%#%#")) {
-                read = read + rd;
-                rd = in.readLine();
-                System.out.println(read);
+        PrivateKey priv;
+        try (ObjectInputStream inK = new ObjectInputStream(new FileInputStream("User.Key"))) {
+            priv = (PrivateKey) inK.readObject();
+        }
+        try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
+            String read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+            while (!read.equals("#%%#")) {
+                String rd = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+                while (!rd.equals("%#%#")) {
+                    read = read + rd;
+                    rd = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+                }
+                String[] slt = read.split("//");
+                boolean bool = Boolean.parseBoolean(slt[3]);
+                model.addRow(new Object[]{slt[0], slt[1], slt[2], bool});
+                read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
             }
-            System.out.println("eeeee");
-            String[] slt = read.split("//");
-            boolean bool = Boolean.parseBoolean(slt[3]);
-            System.out.println(new String(RSA.deszyfruj(slt[0], priv)));
-            System.out.println("eeeee");
-            model.addRow(new Object[]{new String(RSA.deszyfruj(slt[0], priv)), new String(RSA.deszyfruj(slt[1], priv)), new String(RSA.deszyfruj(slt[2], priv)), bool});
-            read = in.readLine();
         }
     }
 
     private static void removeAll(DefaultTableModel model) {
         int RC = model.getRowCount();
-        for (int R = 0; R < RC; R++) {
+        for (int R = RC - 1; R >= 0; R--) {
             model.removeRow(R);
         }
     }
@@ -108,24 +99,17 @@ class RSA {
         pub = pair.getPublic();
     }
 
-    static byte[] szyfruj(String tekst) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
+    static byte[] ENCRYPTING(String tekst) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
         //-- CipherStream: szyfrowanie --                                                                           
         c1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c1.init(Cipher.ENCRYPT_MODE, pub);
         return c1.doFinal(tekst.getBytes());
     }
 
-    static byte[] deszyfruj(String tekst) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
+    static String DECRYPTING(byte[] tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
         //-- CipherStream: deszyfrowanie  --                                                                        
-        javax.crypto.Cipher c2 = javax.crypto.Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        Cipher c2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c2.init(Cipher.DECRYPT_MODE, priv);
-        return c2.doFinal(tekst.getBytes());
-    }
-
-    static byte[] deszyfruj(String tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
-        //-- CipherStream: deszyfrowanie  --                                                                        
-        javax.crypto.Cipher c2 = javax.crypto.Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        c2.init(Cipher.DECRYPT_MODE, priv);
-        return c2.doFinal(tekst.getBytes());
+        return new String(c2.doFinal(tekst));
     }
 }
