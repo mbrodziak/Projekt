@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -65,6 +66,11 @@ public class OrganizerZadan extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(0, 0, 0));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -85,12 +91,30 @@ public class OrganizerZadan extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jTable);
+        jTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(1).setResizable(false);
+            jTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+        jTable.getAccessibleContext().setAccessibleDescription("");
 
         ADDButton.setText("ADD");
         ADDButton.setActionCommand("ADDButton");
@@ -320,6 +344,26 @@ public class OrganizerZadan extends javax.swing.JFrame {
             new CHNPSS().setVisible(true);
         });        
     }//GEN-LAST:event_ChnPssButtonActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        try {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            int ROW = jTable.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            jDateChooser.setDate(dFormat.parse((String) model.getValueAt(ROW, 0)));
+            WhereField.setText((String) model.getValueAt(ROW, 1));
+            WhatField.setText((String) model.getValueAt(ROW, 2));
+        } catch (ParseException ex) {
+        }
+    }//GEN-LAST:event_jTableMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            jDateChooser.cleanup();
+            WhereField.setText("");
+            WhatField.setText("");
+    }//GEN-LAST:event_formMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
