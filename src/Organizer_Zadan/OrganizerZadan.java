@@ -312,13 +312,15 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
     private void LOGOUTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new LOGIN().setVisible(true);
+            new LOGIN_PANEL().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_LOGOUTButtonActionPerformed
 
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
-        
+        java.awt.EventQueue.invokeLater(() -> {
+            new CHNPSS().setVisible(true);
+        });        
     }//GEN-LAST:event_ChnPssButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

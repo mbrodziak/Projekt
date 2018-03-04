@@ -5,20 +5,21 @@
  */
 package Organizer_Zadan;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
  *
  * @author MatriX
  */
-public class LOGIN extends javax.swing.JFrame {
+public class LOGIN_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -2226871920361698064L;
 
     /**
-     * Creates new form LOGIN
+     * Creates new form getPassword
      */
-    public LOGIN() {
+    public LOGIN_PANEL() {
         initComponents();
     }
 
@@ -77,13 +78,16 @@ public class LOGIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LOGINButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINButtonActionPerformed
-        char[] pssw = PasswordField.getPassword();
-        char[] pss0 = {'0','0','0','0'};
-        if (Arrays.equals(pssw, pss0)){
-        java.awt.EventQueue.invokeLater(() -> {
-            new OrganizerZadan().setVisible(true);
-        });
-        this.dispose();
+        try {
+            char[] pssw = PasswordField.getPassword();
+            char[] pss0 = LOGSystem.getPassword();
+            if (Arrays.equals(pssw, pss0)){
+                java.awt.EventQueue.invokeLater(() -> {
+                    new OrganizerZadan().setVisible(true);
+                });
+                this.dispose();
+            }
+        } catch (IOException | ClassNotFoundException ex) {
         }
     }//GEN-LAST:event_LOGINButtonActionPerformed
 
