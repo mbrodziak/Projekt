@@ -5,7 +5,6 @@
  */
 package Organizer_Zadan;
 
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
@@ -278,16 +277,15 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            SaveLoadSystem.save(model);
-        } catch (FileNotFoundException ex) {
-        } catch (NoSuchAlgorithmException | InvalidKeyException | IOException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+            SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
+        }  catch (NoSuchAlgorithmException | InvalidKeyException | IOException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            SaveLoadSystem.load(model);
+            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model));
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
@@ -295,7 +293,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            SaveLoadSystem.load(model);
+            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model));
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_formWindowOpened
@@ -304,7 +302,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         if (AutoSaveCheckBox.isSelected()) {
             try {
                 DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-                SaveLoadSystem.save(model);
+                SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
             } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
             }
         }

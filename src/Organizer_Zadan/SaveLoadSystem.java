@@ -27,11 +27,12 @@ public class SaveLoadSystem {
     
 static RSA rsa;
 
-    public static void save(DefaultTableModel model) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
+    public static void save(DefaultTableModel model, boolean AutoSave) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
         rsa = new RSA();
         int ile = model.getRowCount();
         try (ObjectOutputStream outO = new ObjectOutputStream(new FileOutputStream("user.save"))) {
             outO.writeObject(rsa.priv);
+            outO.writeObject(rsa.ENCRYPTING(Boolean.toString(AutoSave)));
             for (int i = 0; i < ile; i++) {
                 outO.writeObject(rsa.ENCRYPTING((String) model.getValueAt(i, 0)));
                 outO.writeObject(rsa.ENCRYPTING("//"));
@@ -51,11 +52,12 @@ static RSA rsa;
         }
     }
 
-    public static void load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
+    public static boolean load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
-        PrivateKey priv;
+        boolean AutoSave;
         try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
-            priv = (PrivateKey) inO.readObject();
+            PrivateKey priv = (PrivateKey) inO.readObject();          
+            AutoSave = Boolean.parseBoolean(RSA.DECRYPTING((byte[]) inO.readObject(), priv));
             String read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
             while (!read.equals("#%%#")) {
                 String rd = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
@@ -69,6 +71,7 @@ static RSA rsa;
                 read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
             }
         }
+        return AutoSave;
     }
 
     private static void removeAll(DefaultTableModel model) {
