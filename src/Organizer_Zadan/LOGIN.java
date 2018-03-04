@@ -79,8 +79,6 @@ public class LOGIN extends javax.swing.JFrame {
     private void LOGINButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINButtonActionPerformed
         char[] pssw = PasswordField.getPassword();
         char[] pss0 = {'0','0','0','0'};
-        System.out.println(pssw);
-        System.out.println(pss0);
         if (Arrays.equals(pssw, pss0)){
         java.awt.EventQueue.invokeLater(() -> {
             new OrganizerZadan().setVisible(true);

@@ -53,20 +53,34 @@ public class SaveLoadSystem {
                     write.println(false);
                 } else {
                     write.println(model.getValueAt(i, 3));
+
                 }
+                write.println("%#%#");
+
             }
+            write.println("#%%#");
         }
     }
 
-    public static void load(DefaultTableModel model) throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public static void load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException{
         BufferedReader in = new BufferedReader(new FileReader("user.save"));
         removeAll(model);
         ObjectInputStream inK = new ObjectInputStream(new FileInputStream("User.Key"));
         PrivateKey priv = (PrivateKey) inK.readObject();
         String read = in.readLine();
+        System.out.println(read);
         while (!read.equals("#%%#")) {
+            String rd = in.readLine();
+            while (!rd.equals("%#%#")) {
+                read = read + rd;
+                rd = in.readLine();
+                System.out.println(read);
+            }
+            System.out.println("eeeee");
             String[] slt = read.split("//");
             boolean bool = Boolean.parseBoolean(slt[3]);
+            System.out.println(new String(RSA.deszyfruj(slt[0], priv)));
+            System.out.println("eeeee");
             model.addRow(new Object[]{new String(RSA.deszyfruj(slt[0], priv)), new String(RSA.deszyfruj(slt[1], priv)), new String(RSA.deszyfruj(slt[2], priv)), bool});
             read = in.readLine();
         }
@@ -75,7 +89,7 @@ public class SaveLoadSystem {
     private static void removeAll(DefaultTableModel model) {
         int RC = model.getRowCount();
         for (int R = 0; R < RC; R++) {
-            model.removeRow(RC);
+            model.removeRow(R);
         }
     }
 }

@@ -288,7 +288,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SaveLoadSystem.load(model);
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
 
@@ -296,7 +296,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SaveLoadSystem.load(model);
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_formWindowOpened
 
