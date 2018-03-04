@@ -6,7 +6,12 @@
 package Organizer_Zadan;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  *
@@ -98,7 +103,7 @@ public class CHNPSS extends javax.swing.JFrame {
                 LOGSystem.setPassword(NewPssField.getPassword());
                 this.dispose();
             }
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
         }
         
     }//GEN-LAST:event_ChangeButtonActionPerformed

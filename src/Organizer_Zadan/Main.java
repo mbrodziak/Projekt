@@ -6,7 +6,13 @@
 package Organizer_Zadan;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  *
@@ -14,7 +20,7 @@ import java.io.IOException;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         File file = new File("user.pass");
         if (file.createNewFile()) {
             char[] pss0 = {'0','0','0','0'};
