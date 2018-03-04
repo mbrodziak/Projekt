@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -24,11 +25,11 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class LOGSystem {
 
-    private static RSA rsa;
     static char [] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
         char[] pss0;
-        try (ObjectInputStream inP = new ObjectInputStream(new FileInputStream("user.pass"))) {
+        try (ObjectInputStream inP = new ObjectInputStream(new FileInputStream("user.save"))) {
             PrivateKey priv = (PrivateKey) inP.readObject();
+            inP.readObject();
             pss0 = RSA.DECRYPTING((byte[]) inP.readObject(), priv).toCharArray();
         }
         return pss0;
@@ -36,10 +37,11 @@ public class LOGSystem {
     }
 
     static void setPassword(char[] pss0) throws FileNotFoundException, IOException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-        try (ObjectOutputStream outP = new ObjectOutputStream(new FileOutputStream("user.pass"))) {
-            rsa = new RSA();
-            outP.writeObject(rsa.priv);
-            outP.writeObject(rsa.ENCRYPTING(new String (pss0)));
+        try (ObjectOutputStream outP = new ObjectOutputStream(new FileOutputStream("user.save"))) {
+            Object[] KPP = RSA.GenerateKeys();
+            outP.writeObject(KPP[0]);
+            outP.writeObject(KPP[1]);
+            outP.writeObject(RSA.ENCRYPTING(new String (pss0), (PublicKey) KPP[1]));
             outP.flush();
         }
     }

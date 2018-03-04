@@ -302,7 +302,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
-        }  catch (NoSuchAlgorithmException | InvalidKeyException | IOException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+        }  catch (NoSuchAlgorithmException | InvalidKeyException | IOException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | ClassNotFoundException ex) {
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
@@ -327,7 +327,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
             try {
                 DefaultTableModel model = (DefaultTableModel) jTable.getModel();
                 SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
-            } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
+            } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | ClassNotFoundException ex) {
             }
         }
     }//GEN-LAST:event_formWindowClosing
@@ -342,7 +342,8 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
             new CHNPSS().setVisible(true);
-        });        
+            
+        });
     }//GEN-LAST:event_ChnPssButtonActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
@@ -367,7 +368,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
-    private javax.swing.JCheckBox AutoSaveCheckBox;
+    public static javax.swing.JCheckBox AutoSaveCheckBox;
     private javax.swing.JButton ChnPssButton;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton LOGOUTButton;
@@ -382,6 +383,6 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
+    public static javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

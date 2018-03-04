@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -24,30 +25,37 @@ import javax.swing.table.DefaultTableModel;
  * @author MatriX
  */
 public class SaveLoadSystem {
-    
-static RSA rsa;
 
-    public static void save(DefaultTableModel model, boolean AutoSave) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
-        rsa = new RSA();
+    public static void save(DefaultTableModel model, boolean AutoSave) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
         int ile = model.getRowCount();
+        Object priv;
+        PublicKey pub;
+        Object pss0;
+        try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
+            priv = inO.readObject();
+            pub = (PublicKey) inO.readObject();
+            pss0 = inO.readObject();
+        }
         try (ObjectOutputStream outO = new ObjectOutputStream(new FileOutputStream("user.save"))) {
-            outO.writeObject(rsa.priv);
-            outO.writeObject(rsa.ENCRYPTING(Boolean.toString(AutoSave)));
+            outO.writeObject(priv);
+            outO.writeObject(pub);
+            outO.writeObject(pss0);
+            outO.writeObject(RSA.ENCRYPTING(Boolean.toString(AutoSave), pub));
             for (int i = 0; i < ile; i++) {
-                outO.writeObject(rsa.ENCRYPTING((String) model.getValueAt(i, 0)));
-                outO.writeObject(rsa.ENCRYPTING("//"));
-                outO.writeObject(rsa.ENCRYPTING((String) model.getValueAt(i, 1)));
-                outO.writeObject(rsa.ENCRYPTING("//"));
-                outO.writeObject(rsa.ENCRYPTING((String) model.getValueAt(i, 2)));
-                outO.writeObject(rsa.ENCRYPTING("//"));
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 0), pub));
+                outO.writeObject(RSA.ENCRYPTING("//", pub));
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 1), pub));
+                outO.writeObject(RSA.ENCRYPTING("//", pub));
+                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 2), pub));
+                outO.writeObject(RSA.ENCRYPTING("//", pub));
                 if (model.getValueAt(i, 3) == null) {
-                    outO.writeObject(rsa.ENCRYPTING(Boolean.toString(false)));
+                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString(false), pub));
                 } else {
-                    outO.writeObject(rsa.ENCRYPTING(Boolean.toString((boolean) model.getValueAt(i, 3))));
+                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString((boolean) model.getValueAt(i, 3)), pub));
                 }
-                outO.writeObject(rsa.ENCRYPTING("%#%#"));
+                outO.writeObject(RSA.ENCRYPTING("%#%#", pub));
             }
-            outO.writeObject(rsa.ENCRYPTING("#%%#"));
+            outO.writeObject(RSA.ENCRYPTING("#%%#", pub));
             outO.flush();
         }
     }
@@ -56,7 +64,9 @@ static RSA rsa;
         removeAll(model);
         boolean AutoSave;
         try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
-            PrivateKey priv = (PrivateKey) inO.readObject();          
+            PrivateKey priv = (PrivateKey) inO.readObject();
+            inO.readObject();
+            inO.readObject();
             AutoSave = Boolean.parseBoolean(RSA.DECRYPTING((byte[]) inO.readObject(), priv));
             String read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
             while (!read.equals("#%%#")) {

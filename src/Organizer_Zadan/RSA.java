@@ -24,21 +24,19 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class RSA {
 
-    PrivateKey priv;
-    static PublicKey pub;
-    static Cipher c1;
-
-    RSA() throws NoSuchAlgorithmException {
+    static Object[] GenerateKeys() throws NoSuchAlgorithmException {
         KeyPairGenerator kpgen = KeyPairGenerator.getInstance("RSA");
         kpgen.initialize(1024, new java.security.SecureRandom());
         KeyPair pair = kpgen.genKeyPair();
-        priv = pair.getPrivate();
-        pub = pair.getPublic();
+        PrivateKey priv = pair.getPrivate();
+        PublicKey pub = pair.getPublic();
+        Object[] KPP = {priv, pub};
+        return KPP;
     }
 
-    byte[] ENCRYPTING(String tekst) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
-        //-- CipherStream: szyfrowanie --                                                                           
-        c1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+    static byte[] ENCRYPTING(String tekst, PublicKey pub) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
+        //-- CipherStream: szyfrowanie --
+        Cipher c1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c1.init(Cipher.ENCRYPT_MODE, pub);
         return c1.doFinal(tekst.getBytes());
     }

@@ -22,7 +22,7 @@ import javax.crypto.NoSuchPaddingException;
 public class Main {
 
     public static void main(String[] args) throws IOException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
-        File file = new File("user.pass");
+        File file = new File("user.save");
         char[] pss = {};
         if (file.createNewFile()) {
             char[] pss0 = {};
