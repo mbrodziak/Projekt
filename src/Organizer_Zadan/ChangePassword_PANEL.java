@@ -12,20 +12,19 @@ import java.util.Arrays;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author MatriX
  */
-public class CHNPSS extends javax.swing.JFrame {
+public class ChangePassword_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 4898501724548726505L;
 
     /**
      * Creates new form CHNPSS
      */
-    public CHNPSS() {
+    public ChangePassword_PANEL() {
         initComponents();
     }
 
@@ -100,8 +99,8 @@ public class CHNPSS extends javax.swing.JFrame {
 
     private void ChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeButtonActionPerformed
         try {
-            if (Arrays.equals(OldPssField.getPassword(), LOGSystem.getPassword())) {
-                LOGSystem.setPassword(NewPssField.getPassword());
+            if (Arrays.equals(OldPssField.getPassword(), LogSystem.getPassword())) {
+                LogSystem.setPassword(NewPssField.getPassword());
                 this.dispose();
             }
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {

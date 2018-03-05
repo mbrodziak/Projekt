@@ -21,7 +21,7 @@ import javax.crypto.NoSuchPaddingException;
  *
  *
  */
-public class OrganizerZadan extends javax.swing.JFrame {
+public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -4679833238790674239L;
     //String gdzie[] = new String[100]; 
@@ -30,7 +30,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
     /**
      * Creates new form OrganizerZadan
      */
-    public OrganizerZadan() {
+    public TaskOrganizer_PANEL() {
         initComponents();
     }
 
@@ -85,7 +85,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Gdzie?", "Co?", "Wykonano?"
+                "Date", "Where?", "What?", "Taken?"
             }
         ) {
             Class[] types = new Class [] {
@@ -103,6 +103,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable.setColumnSelectionAllowed(true);
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
@@ -154,11 +155,11 @@ public class OrganizerZadan extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Gdzie?");
+        jLabel1.setText("Where?");
 
-        jLabel3.setText("Co?");
+        jLabel3.setText("What?");
 
-        jLabel4.setText("Data");
+        jLabel4.setText("Date");
 
         AutoSaveCheckBox.setText("Autosave");
         AutoSaveCheckBox.setToolTipText("");
@@ -211,7 +212,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
+                                .addGap(28, 28, 28)
                                 .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ADDButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,16 +234,14 @@ public class OrganizerZadan extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(ADDButton))
-                                .addGap(3, 3, 3))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ADDButton))
+                                .addGap(3, 3, 3)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -343,14 +342,14 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
     private void LOGOUTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new LOGIN_PANEL().setVisible(true);
+            new LogIn_PANEL().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_LOGOUTButtonActionPerformed
 
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new CHNPSS().setVisible(true);
+            new ChangePassword_PANEL().setVisible(true);
             
         });
     }//GEN-LAST:event_ChnPssButtonActionPerformed

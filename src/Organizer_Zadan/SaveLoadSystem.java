@@ -40,22 +40,22 @@ public class SaveLoadSystem {
             outO.writeObject(priv);
             outO.writeObject(pub);
             outO.writeObject(pss0);
-            outO.writeObject(RSA.ENCRYPTING(Boolean.toString(AutoSave), pub));
+            outO.writeObject(RSASystem.ENCRYPTING(Boolean.toString(AutoSave), pub));
             for (int i = 0; i < ile; i++) {
-                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 0), pub));
-                outO.writeObject(RSA.ENCRYPTING("//", pub));
-                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 1), pub));
-                outO.writeObject(RSA.ENCRYPTING("//", pub));
-                outO.writeObject(RSA.ENCRYPTING((String) model.getValueAt(i, 2), pub));
-                outO.writeObject(RSA.ENCRYPTING("//", pub));
+                outO.writeObject(RSASystem.ENCRYPTING((String) model.getValueAt(i, 0), pub));
+                outO.writeObject(RSASystem.ENCRYPTING("//", pub));
+                outO.writeObject(RSASystem.ENCRYPTING((String) model.getValueAt(i, 1), pub));
+                outO.writeObject(RSASystem.ENCRYPTING("//", pub));
+                outO.writeObject(RSASystem.ENCRYPTING((String) model.getValueAt(i, 2), pub));
+                outO.writeObject(RSASystem.ENCRYPTING("//", pub));
                 if (model.getValueAt(i, 3) == null) {
-                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString(false), pub));
+                    outO.writeObject(RSASystem.ENCRYPTING(Boolean.toString(false), pub));
                 } else {
-                    outO.writeObject(RSA.ENCRYPTING(Boolean.toString((boolean) model.getValueAt(i, 3)), pub));
+                    outO.writeObject(RSASystem.ENCRYPTING(Boolean.toString((boolean) model.getValueAt(i, 3)), pub));
                 }
-                outO.writeObject(RSA.ENCRYPTING("%#%#", pub));
+                outO.writeObject(RSASystem.ENCRYPTING("%#%#", pub));
             }
-            outO.writeObject(RSA.ENCRYPTING("#%%#", pub));
+            outO.writeObject(RSASystem.ENCRYPTING("#%%#", pub));
             outO.flush();
         }
     }
@@ -67,18 +67,18 @@ public class SaveLoadSystem {
             PrivateKey priv = (PrivateKey) inO.readObject();
             inO.readObject();
             inO.readObject();
-            AutoSave = Boolean.parseBoolean(RSA.DECRYPTING((byte[]) inO.readObject(), priv));
-            String read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+            AutoSave = Boolean.parseBoolean(RSASystem.DECRYPTING((byte[]) inO.readObject(), priv));
+            String read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
             while (!read.equals("#%%#")) {
-                String rd = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+                String rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
                 while (!rd.equals("%#%#")) {
                     read = read + rd;
-                    rd = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+                    rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
                 }
                 String[] slt = read.split("//");
                 boolean bool = Boolean.parseBoolean(slt[3]);
                 model.addRow(new Object[]{slt[0], slt[1], slt[2], bool});
-                read = RSA.DECRYPTING((byte[]) inO.readObject(), priv);
+                read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
             }
         }
         return AutoSave;

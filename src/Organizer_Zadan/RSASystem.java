@@ -22,7 +22,7 @@ import javax.crypto.NoSuchPaddingException;
  *
  * @author MatriX
  */
-public class RSA {
+public class RSASystem {
 
     static Object[] GenerateKeys() throws NoSuchAlgorithmException {
         KeyPairGenerator kpgen = KeyPairGenerator.getInstance("RSA");
