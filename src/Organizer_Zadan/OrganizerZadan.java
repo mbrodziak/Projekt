@@ -275,26 +275,35 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
 
     private void ADDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDButtonActionPerformed
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String date = dFormat.format(jDateChooser.getDate());
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.addRow(new Object[]{date, WhereField.getText(), WhatField.getText()});
+        try {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String date = dFormat.format(jDateChooser.getDate());
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.addRow(new Object[]{date, WhereField.getText(), WhatField.getText()});
+        } catch (NullPointerException e) {
+        }
 
     }//GEN-LAST:event_ADDButtonActionPerformed
 
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String date = dFormat.format(jDateChooser.getDate());
-        int ROW = jTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.removeRow(ROW);
-        model.insertRow(ROW, new Object[]{date, WhereField.getText(), WhatField.getText()});
+        try {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String date = dFormat.format(jDateChooser.getDate());
+            int ROW = jTable.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.removeRow(ROW);
+            model.insertRow(ROW, new Object[]{date, WhereField.getText(), WhatField.getText()});
+        } catch (NullPointerException e) {
+        }
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        int ROW = jTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.removeRow(ROW);
+        try {
+            int ROW = jTable.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.removeRow(ROW);
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
 
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
