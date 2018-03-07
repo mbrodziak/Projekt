@@ -282,11 +282,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     * Metoda pozwala dodać nowe zadania do Organizatora Zadań
-     */
+  
     private void ADDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDButtonActionPerformed
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
@@ -298,11 +294,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ADDButtonActionPerformed
     
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     * Metoda pozwala zmodyfikować wybrane zadania 
-     */
+
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -315,11 +307,6 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     * Metoda pozwala usuwać wybrane zadania z Organizatora Zadań
-     */
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         try {
             int ROW = jTable.getSelectedRow();
@@ -330,12 +317,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     * Metoda, która wywołuje metodę save z klasy SaveLoadSystem 
-     * @see SaveLoadSystem.save(model)
-     */
+
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -344,12 +326,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     * Metoda, która wywołuje metodę load z klasy SaveLoadSystem 
-     * @see SaveLoadSystem.load(model)
-     */
+
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -358,10 +335,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -370,10 +344,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (AutoSaveCheckBox.isSelected()) {
             try {
@@ -384,10 +355,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void LOGOUTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
             new LogIn_PANEL().setVisible(true);
@@ -395,10 +363,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LOGOUTButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
             new ChangePassword_PANEL().setVisible(true);
@@ -406,10 +371,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_ChnPssButtonActionPerformed
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+    
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -422,10 +384,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableMouseClicked
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -434,12 +393,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             WhatField.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt
-     * Metoda, która wywołuje metodę todayLoad z klasy SaveLoadSystem 
-     * @see SaveLoadSystem.todayLoad(model)
-     */
+
     private void TodayLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodayLoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();

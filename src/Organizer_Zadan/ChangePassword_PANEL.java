@@ -14,7 +14,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
+ * Klasa, odpowiadająca za zmianę hasła
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
@@ -98,10 +98,7 @@ public class ChangePassword_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void ChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeButtonActionPerformed
         try {
             if (Arrays.equals(OldPssField.getPassword(), LogSystem.getPassword())) {

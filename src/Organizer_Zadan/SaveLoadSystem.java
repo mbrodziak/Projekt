@@ -31,6 +31,7 @@ public class SaveLoadSystem {
 
     /**
      * Metoda przyjmuje dwa parametry
+     * Medota, pozwalająca zapisać wprowadzone zadania z Organizatora Zadań do pliku 
      * @param model
      * @param AutoSave
      * @throws NoSuchAlgorithmException
@@ -41,7 +42,6 @@ public class SaveLoadSystem {
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      * @throws ClassNotFoundException
-     * Medota, pozwalająca zapisać wprowadzone zadania z Organizatora Zadań do pliku 
      */
     public static void save(DefaultTableModel model, boolean AutoSave) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
         int ile = model.getRowCount();
@@ -79,9 +79,11 @@ public class SaveLoadSystem {
 
     /**
      * Metoda przyjmuje dwa parametry
+     * Metoda, pozwalająca wczytać konkretne zadania z pliku do Organizatora Zadań
+     * Wykorzystuje ją metoda todayLoad
      * @param model
      * @param date
-     * @return
+     * @return true lub false, w zależności od zaznaczonej opcji Autosave
      * @throws IOException
      * @throws ClassNotFoundException
      * @throws NoSuchAlgorithmException
@@ -89,9 +91,9 @@ public class SaveLoadSystem {
      * @throws InvalidKeyException
      * @throws FileNotFoundException
      * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
-     * Metoda, pozwalająca wczytać konkretne zadania z pliku do Organizatora Zadań
-     * Wykorzystuje ją metoda todayLoad
+     * @throws BadPaddingException
+     * @see todayLoad(model)
+
      */
     public static boolean load(DefaultTableModel model, String date) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
@@ -122,9 +124,10 @@ public class SaveLoadSystem {
     }
 
     /**
-     * Metoda przyjmuje dwa parametry
+     * Metoda przyjmuje dwa parametry      
+     * Metoda, pozwalająca wczytać wszystkie zadania z pliku do Organizatora Zadań
      * @param model
-     * @return
+     * @return true lub false, w zależności od zaznaczonej opcji Autosave
      * @throws IOException
      * @throws ClassNotFoundException
      * @throws NoSuchAlgorithmException
@@ -133,7 +136,6 @@ public class SaveLoadSystem {
      * @throws FileNotFoundException
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException 
-     * Metoda, pozwalająca wczytać wszystkie zadania z pliku do Organizatora Zadań
      */
     public static boolean load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
@@ -162,7 +164,9 @@ public class SaveLoadSystem {
     }
 
     /**
-     * Metoda przyjmuje jeden parametr
+     * Metoda przyjmuje jeden parametr      
+     * Metoda, pozwalająca wyświetlić zadania na dzisiaj
+     * Wczytuje zadania z pliku do Organizatora zadań za pomocą metody load z dwoma parametrami
      * @param model
      * @throws IOException
      * @throws ClassNotFoundException
@@ -172,8 +176,6 @@ public class SaveLoadSystem {
      * @throws FileNotFoundException
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException 
-     * Metoda, pozwalająca wyświetlić zadania na dzisiaj
-     * Wczytuje zadania z pliku do Organizatora zadań za pomocą metody load z dwoma parametrami
      * @see load(model, date)
      */
     public static void todayLoad(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
@@ -183,10 +185,7 @@ public class SaveLoadSystem {
         load(model, currentDate);
     }
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param model 
-     */
+
     private static void removeAll(DefaultTableModel model) {
         int RC = model.getRowCount();
         for (int R = RC - 1; R >= 0; R--) {

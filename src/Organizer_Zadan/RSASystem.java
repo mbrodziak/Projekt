@@ -19,18 +19,19 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
- *@author Mateusz Brodziak, Mateusz Olszewski
+ * Klasa, pozwalajająca na generowanie kluczy, szyfrowanie i odszyfrowywanie
+ * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
 public class RSASystem {
 
     /**
-     * 
-     * @return
-     * @throws NoSuchAlgorithmException 
+     * Metoda nie przyjmuje żadnych parametrów      
+     * Metoda generuje klucze prywatne i publiczne 
+     * @return klucze prywatne i publiczne w formie Array
+     * @throws NoSuchAlgorithmException
      */
-    static Object[] GenerateKeys() throws NoSuchAlgorithmException {
+    public static Object[] GenerateKeys() throws NoSuchAlgorithmException {
         KeyPairGenerator kpgen = KeyPairGenerator.getInstance("RSA");
         kpgen.initialize(1024, new java.security.SecureRandom());
         KeyPair pair = kpgen.genKeyPair();
@@ -41,19 +42,20 @@ public class RSASystem {
     }
 
     /**
-     * Metoda przyjmuje dwa parametry
+     * Metoda przyjmuje dwa parametry      
+     * Metoda szyfruje podany tekst, za pomocą podanego klucza publicznego
      * @param tekst
      * @param pub
-     * @return
+     * @return zaszyfrowaną formę podanego tekstu
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
      * @throws FileNotFoundException
      * @throws NoSuchPaddingException
      * @throws IOException
      * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
+     * @throws BadPaddingException
      */
-    static byte[] ENCRYPTING(String tekst, PublicKey pub) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
+    public static byte[] ENCRYPTING(String tekst, PublicKey pub) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
         //-- CipherStream: szyfrowanie --
         Cipher c1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c1.init(Cipher.ENCRYPT_MODE, pub);
@@ -62,9 +64,10 @@ public class RSASystem {
 
     /**
      * Metoda przyjmuje dwa parametry
+     * Metoda odszyfrowywuje tekst, za pomocą klucza prywatnego
      * @param tekst
      * @param priv
-     * @return
+     * @return odszyfrowaną formę tekstu
      * @throws NoSuchAlgorithmException
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException
@@ -72,9 +75,9 @@ public class RSASystem {
      * @throws IOException
      * @throws ClassNotFoundException
      * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
+     * @throws BadPaddingException
      */
-    static String DECRYPTING(byte[] tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
+    public static String DECRYPTING(byte[] tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
         //-- CipherStream: deszyfrowanie  --                                                                        
         Cipher c2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c2.init(Cipher.DECRYPT_MODE, priv);

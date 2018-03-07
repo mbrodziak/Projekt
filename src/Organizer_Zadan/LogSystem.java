@@ -20,7 +20,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
+ * Klasa, odpowiadająca za logowanie
+ * Sprawdza poprawność wpisanego hasła
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
@@ -28,7 +29,7 @@ public class LogSystem {
 
     /**
      * Metoda nie przyjmuje żądnych parametrów
-     * @return
+     * @return hasło
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
@@ -36,9 +37,9 @@ public class LogSystem {
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException
      * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
+     * @throws BadPaddingException
      */
-    static char [] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
+    public static char [] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
         char[] pss0;
         try (ObjectInputStream inP = new ObjectInputStream(new FileInputStream("user.save"))) {
             PrivateKey priv = (PrivateKey) inP.readObject();
@@ -58,9 +59,10 @@ public class LogSystem {
      * @throws InvalidKeyException
      * @throws NoSuchPaddingException
      * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
+     * @throws BadPaddingException
+     * Metoda pozwala ustawić hasło 
      */
-    static void setPassword(char[] pss0) throws FileNotFoundException, IOException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+    public static void setPassword(char[] pss0) throws FileNotFoundException, IOException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         try (ObjectOutputStream outP = new ObjectOutputStream(new FileOutputStream("user.save"))) {
             Object[] KPP = RSASystem.GenerateKeys();
             outP.writeObject(KPP[0]);
