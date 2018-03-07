@@ -17,10 +17,23 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- *
+ *@author Mateusz Brodziak, Mateusz Olszewski
+ * 
  */
 public class Main {
 
+    /**
+     * 
+     * @param args
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException
+     * @throws ClassNotFoundException 
+     */
     public static void main(String[] args) throws IOException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
         File file = new File("user.save");
         char[] pss = {};

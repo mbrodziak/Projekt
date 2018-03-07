@@ -16,7 +16,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -24,11 +23,26 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ *Klasa, odpowiadająca za zapisywania i wczytywanie z pliku zadań
+ *@author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
 public class SaveLoadSystem {
 
+    /**
+     * Metoda przyjmuje dwa parametry
+     * @param model
+     * @param AutoSave
+     * @throws NoSuchAlgorithmException
+     * @throws FileNotFoundException
+     * @throws InvalidKeyException
+     * @throws NoSuchPaddingException
+     * @throws IOException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException
+     * @throws ClassNotFoundException
+     * Medota, pozwalająca zapisać wprowadzone zadania z Organizatora Zadań do pliku 
+     */
     public static void save(DefaultTableModel model, boolean AutoSave) throws NoSuchAlgorithmException, FileNotFoundException, InvalidKeyException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
         int ile = model.getRowCount();
         Object priv;
@@ -63,6 +77,22 @@ public class SaveLoadSystem {
         }
     }
 
+    /**
+     * Metoda przyjmuje dwa parametry
+     * @param model
+     * @param date
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws InvalidKeyException
+     * @throws FileNotFoundException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     * Metoda, pozwalająca wczytać konkretne zadania z pliku do Organizatora Zadań
+     * Wykorzystuje ją metoda todayLoad
+     */
     public static boolean load(DefaultTableModel model, String date) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
         boolean AutoSave;
@@ -91,6 +121,20 @@ public class SaveLoadSystem {
         return AutoSave;
     }
 
+    /**
+     * Metoda przyjmuje dwa parametry
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws InvalidKeyException
+     * @throws FileNotFoundException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     * Metoda, pozwalająca wczytać wszystkie zadania z pliku do Organizatora Zadań
+     */
     public static boolean load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
         boolean AutoSave;
@@ -117,6 +161,21 @@ public class SaveLoadSystem {
         return AutoSave;
     }
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param model
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws InvalidKeyException
+     * @throws FileNotFoundException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     * Metoda, pozwalająca wyświetlić zadania na dzisiaj
+     * Wczytuje zadania z pliku do Organizatora zadań za pomocą metody load z dwoma parametrami
+     * @see load(model, date)
+     */
     public static void todayLoad(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date CurrDate = new Date();
@@ -124,6 +183,10 @@ public class SaveLoadSystem {
         load(model, currentDate);
     }
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param model 
+     */
     private static void removeAll(DefaultTableModel model) {
         int RC = model.getRowCount();
         for (int R = RC - 1; R >= 0; R--) {

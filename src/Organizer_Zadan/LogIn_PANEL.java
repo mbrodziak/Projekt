@@ -15,6 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
+ * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
 public class LogIn_PANEL extends javax.swing.JFrame {
@@ -82,6 +83,10 @@ public class LogIn_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void LOGINButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINButtonActionPerformed
         try {
             char[] pssw = PasswordField.getPassword();

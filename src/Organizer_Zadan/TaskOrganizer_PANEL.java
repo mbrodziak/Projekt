@@ -16,16 +16,14 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
- *
- *
+ *Klasa, odpowiadająca za wygląd aplikacji oraz funkcji poszczególnych przycisków 
+ *@author Mateusz Brodziak, Mateusz Olszewski
  *
  */
 public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -4679833238790674239L;
-    //String gdzie[] = new String[100]; 
-    //String co[] = new String[100];
+
 
     /**
      * Creates new form OrganizerZadan
@@ -60,7 +58,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         AutoSaveCheckBox = new javax.swing.JCheckBox();
         LOGOUTButton = new javax.swing.JButton();
         ChnPssButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        TodayLoadButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Organizer Zadań");
@@ -78,12 +76,6 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-        });
-
-        WhatField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WhatFieldActionPerformed(evt);
             }
         });
 
@@ -186,10 +178,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Today Load");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TodayLoadButton.setText("Today Load");
+        TodayLoadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TodayLoadButtonActionPerformed(evt);
             }
         });
 
@@ -214,7 +206,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
                                 .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(LoadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(TodayLoadButton, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -279,7 +271,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LoadButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(TodayLoadButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LOGOUTButton)
@@ -290,7 +282,11 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala dodać nowe zadania do Organizatora Zadań
+     */
     private void ADDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDButtonActionPerformed
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
@@ -301,7 +297,12 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_ADDButtonActionPerformed
-
+    
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala zmodyfikować wybrane zadania 
+     */
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -314,6 +315,11 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala usuwać wybrane zadania z Organizatora Zadań
+     */
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         try {
             int ROW = jTable.getSelectedRow();
@@ -324,6 +330,12 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda, która wywołuje metodę save z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.save(model)
+     */
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -332,6 +344,12 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda, która wywołuje metodę load z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.load(model)
+     */
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -340,6 +358,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -348,6 +370,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (AutoSaveCheckBox.isSelected()) {
             try {
@@ -358,6 +384,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void LOGOUTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
             new LogIn_PANEL().setVisible(true);
@@ -365,6 +395,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LOGOUTButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
             new ChangePassword_PANEL().setVisible(true);
@@ -372,6 +406,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_ChnPssButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -384,6 +422,10 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableMouseClicked
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -392,17 +434,20 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             WhatField.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt
+     * Metoda, która wywołuje metodę todayLoad z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.todayLoad(model)
+     */
+    private void TodayLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodayLoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SaveLoadSystem.todayLoad(model);
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_TodayLoadButtonActionPerformed
 
-    private void WhatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WhatFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_WhatFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
@@ -413,9 +458,9 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
     private javax.swing.JButton LoadButton;
     private javax.swing.JButton ModifyButton;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton TodayLoadButton;
     private javax.swing.JTextField WhatField;
     private javax.swing.JTextField WhereField;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
