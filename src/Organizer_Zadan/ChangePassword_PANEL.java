@@ -15,7 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author MatriX
+ * 
  */
 public class ChangePassword_PANEL extends javax.swing.JFrame {
 

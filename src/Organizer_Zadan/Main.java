@@ -17,7 +17,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author student
+ *
  */
 public class Main {
 

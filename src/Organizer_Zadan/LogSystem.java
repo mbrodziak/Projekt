@@ -21,7 +21,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author MatriX
+ * 
  */
 public class LogSystem {
 

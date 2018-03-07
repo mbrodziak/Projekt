@@ -15,7 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author MatriX
+ * 
  */
 public class LogIn_PANEL extends javax.swing.JFrame {
 
