@@ -56,7 +56,6 @@ public class RSASystem {
      * @throws BadPaddingException
      */
     public static byte[] ENCRYPTING(String tekst, PublicKey pub) throws NoSuchAlgorithmException, InvalidKeyException, FileNotFoundException, NoSuchPaddingException, IOException, IllegalBlockSizeException, BadPaddingException {
-        //-- CipherStream: szyfrowanie --
         Cipher c1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c1.init(Cipher.ENCRYPT_MODE, pub);
         return c1.doFinal(tekst.getBytes());
@@ -77,8 +76,7 @@ public class RSASystem {
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */
-    public static String DECRYPTING(byte[] tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {
-        //-- CipherStream: deszyfrowanie  --                                                                        
+    public static String DECRYPTING(byte[] tekst, PrivateKey priv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IOException, ClassNotFoundException, IllegalBlockSizeException, BadPaddingException {                                                                    
         Cipher c2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         c2.init(Cipher.DECRYPT_MODE, priv);
         return new String(c2.doFinal(tekst));

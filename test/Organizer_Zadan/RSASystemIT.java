@@ -14,6 +14,7 @@ import java.security.PublicKey;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,13 +52,13 @@ public class RSASystemIT {
      * @throws java.security.NoSuchAlgorithmException
      */
     @Test
-    public void testGenerateKeys() throws NoSuchAlgorithmException {
+    public void testGenerateKeys() throws NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IOException, FileNotFoundException, IllegalBlockSizeException, ClassNotFoundException {
         System.out.println("GenerateKeys");
-        Object[] expResult = null;
-        Object[] result = RSASystem.GenerateKeys();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Object[] Keys = RSASystem.GenerateKeys();
+        String test = "String testowy";
+        boolean result = test.equals(RSASystem.DECRYPTING(RSASystem.ENCRYPTING(test, (PublicKey) Keys[1]), (PrivateKey) Keys[0]));
+        assert result;
+        
     }
 
     /**
@@ -79,7 +80,6 @@ public class RSASystemIT {
         byte[] result = RSASystem.ENCRYPTING(tekst, pub);
         assertArrayEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -94,7 +94,6 @@ public class RSASystemIT {
         String result = RSASystem.DECRYPTING(tekst, priv);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
