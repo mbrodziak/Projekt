@@ -14,7 +14,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa, odpowiadająca za zmianę hasła
+ * Klasa, umożliwiająca zmianę hasła
+ * Odpowiada za wygląd panelu 
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */

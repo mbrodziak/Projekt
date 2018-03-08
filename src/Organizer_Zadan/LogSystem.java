@@ -20,7 +20,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa, odpowiadająca za logowanie
+ * Klasa, odpowiadająca za logowanie użytkownika
  * Sprawdza poprawność wpisanego hasła
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
@@ -52,6 +52,7 @@ public class LogSystem {
 
     /**
      * Metoda przyjmuje jeden parametr
+     * Metoda pozwala ustawić hasło 
      * @param pss0
      * @throws FileNotFoundException
      * @throws IOException
@@ -60,7 +61,6 @@ public class LogSystem {
      * @throws NoSuchPaddingException
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
-     * Metoda pozwala ustawić hasło 
      */
     public static void setPassword(char[] pss0) throws FileNotFoundException, IOException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         try (ObjectOutputStream outP = new ObjectOutputStream(new FileOutputStream("user.save"))) {

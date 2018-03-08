@@ -23,7 +23,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *Klasa, odpowiadająca za zapisywania i wczytywanie z pliku zadań
+ *Klasa, odpowiadająca za zapisywanie i wczytywanie zadań 
  *@author Mateusz Brodziak, Mateusz Olszewski
  * 
  */

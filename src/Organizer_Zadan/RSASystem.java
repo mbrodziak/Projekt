@@ -19,7 +19,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa, pozwalajająca na generowanie kluczy, szyfrowanie i odszyfrowywanie
+ * Klasa, pozwalajająca na generowanie kluczy, szyfrowanie i odszyfrowywanie tekstów
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
@@ -46,7 +46,7 @@ public class RSASystem {
      * Metoda szyfruje podany tekst, za pomocą podanego klucza publicznego
      * @param tekst
      * @param pub
-     * @return zaszyfrowaną formę podanego tekstu
+     * @return zaszyfrowana forma podanego tekstu
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
      * @throws FileNotFoundException
@@ -67,7 +67,7 @@ public class RSASystem {
      * Metoda odszyfrowywuje tekst, za pomocą klucza prywatnego
      * @param tekst
      * @param priv
-     * @return odszyfrowaną formę tekstu
+     * @return odszyfrowana forma tekstu
      * @throws NoSuchAlgorithmException
      * @throws NoSuchPaddingException
      * @throws InvalidKeyException

@@ -14,7 +14,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa ,odpowiadająca za panel logowania
+ * Klasa, odpowiadająca za wygląd Panelu Logowania
+ * Sprawdza popraność podanego hasłą, porównując go z hasłem z pliku o rozszerzeniu "save"
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
