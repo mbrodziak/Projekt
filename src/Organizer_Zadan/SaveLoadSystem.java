@@ -23,15 +23,17 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *Klasa, odpowiadająca za zapisywanie i wczytywanie zadań 
- *@author Mateusz Brodziak, Mateusz Olszewski
- * 
+ * Klasa, odpowiadająca za zapisywanie i wczytywanie zadań
+ *
+ * @author Mateusz Brodziak, Mateusz Olszewski
+ *
  */
 public class SaveLoadSystem {
 
     /**
-     * Metoda przyjmuje dwa parametry
-     * Medota, pozwalająca zapisać wprowadzone zadania z Organizatora Zadań do pliku 
+     * Metoda przyjmuje dwa parametry Medota, pozwalająca zapisać wprowadzone
+     * zadania z Organizatora Zadań do pliku
+     *
      * @param model
      * @param AutoSave
      * @throws NoSuchAlgorithmException
@@ -78,11 +80,11 @@ public class SaveLoadSystem {
     }
 
     /**
-     * Metoda przyjmuje dwa parametry
-     * Metoda, pozwalająca wczytać konkretne zadania z pliku do Organizatora Zadań
-     * Wykorzystuje ją metoda todayLoad
+     * Metoda przyjmuje dwa parametry Metoda, pozwalająca wczytać wszystkie
+     * zadania z pliku do Organizatora Zadań
+     *
      * @param model
-     * @param date
+     * @param TYPE
      * @return true lub false, w zależności od zaznaczonej opcji Autosave
      * @throws IOException
      * @throws ClassNotFoundException
@@ -92,99 +94,48 @@ public class SaveLoadSystem {
      * @throws FileNotFoundException
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
-     * @see todayLoad(model)
-
      */
-    public static boolean load(DefaultTableModel model, String date) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
+    public static boolean load(DefaultTableModel model, String TYPE) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         removeAll(model);
-        boolean AutoSave;
-        try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
-            PrivateKey priv = (PrivateKey) inO.readObject();
-            inO.readObject();
-            inO.readObject();
-            AutoSave = Boolean.parseBoolean(RSASystem.DECRYPTING((byte[]) inO.readObject(), priv));
-            String read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-            while (!read.equals("#%%#")) {
-                String rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-                while (!rd.equals("%#%#")) {
-                    read = read + rd;
-                    rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-                }
-                String[] slt = read.split("//");
-                boolean bool = Boolean.parseBoolean(slt[3]);
-                String currentDate = slt[0];
-                if (currentDate.equals(date)) {
-                    model.addRow(new Object[]{date, slt[1], slt[2], bool});
-                }
-
-                read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-            }
-        }
-        return AutoSave;
-    }
-
-    /**
-     * Metoda przyjmuje dwa parametry      
-     * Metoda, pozwalająca wczytać wszystkie zadania z pliku do Organizatora Zadań
-     * @param model
-     * @return true lub false, w zależności od zaznaczonej opcji Autosave
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @throws NoSuchAlgorithmException
-     * @throws NoSuchPaddingException
-     * @throws InvalidKeyException
-     * @throws FileNotFoundException
-     * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
-     */
-    public static boolean load(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
-        removeAll(model);
-        boolean AutoSave;
-        try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
-            PrivateKey priv = (PrivateKey) inO.readObject();
-            inO.readObject();
-            inO.readObject();
-            AutoSave = Boolean.parseBoolean(RSASystem.DECRYPTING((byte[]) inO.readObject(), priv));
-            String read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-            while (!read.equals("#%%#")) {
-                String rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-                while (!rd.equals("%#%#")) {
-                    read = read + rd;
-                    rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-                }
-                String[] slt = read.split("//");
-                boolean bool = Boolean.parseBoolean(slt[3]);
-
-                model.addRow(new Object[]{slt[0], slt[1], slt[2], bool});
-
-                read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
-            }
-        }
-        return AutoSave;
-    }
-
-    /**
-     * Metoda przyjmuje jeden parametr      
-     * Metoda, pozwalająca wyświetlić zadania na dzisiaj
-     * Wczytuje zadania z pliku do Organizatora zadań za pomocą metody load z dwoma parametrami
-     * @param model
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @throws NoSuchAlgorithmException
-     * @throws NoSuchPaddingException
-     * @throws InvalidKeyException
-     * @throws FileNotFoundException
-     * @throws IllegalBlockSizeException
-     * @throws BadPaddingException 
-     * @see load(model, date)
-     */
-    public static void todayLoad(DefaultTableModel model) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, FileNotFoundException, IllegalBlockSizeException, BadPaddingException {
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date CurrDate = new Date();
-        String currentDate = dFormat.format(CurrDate);
-        load(model, currentDate);
-    }
+        String currentDat0 = dFormat.format(CurrDate);
+        boolean AutoSave;
+        try (ObjectInputStream inO = new ObjectInputStream(new FileInputStream("user.save"))) {
+            PrivateKey priv = (PrivateKey) inO.readObject();
+            inO.readObject();
+            inO.readObject();
+            AutoSave = Boolean.parseBoolean(RSASystem.DECRYPTING((byte[]) inO.readObject(), priv));
+            String read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
+            while (!read.equals("#%%#")) {
+                String rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
+                while (!rd.equals("%#%#")) {
+                    read = read + rd;
+                    rd = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
+                }
+                String[] slt = read.split("//");
+                boolean bool = Boolean.parseBoolean(slt[3]);
+                switch (TYPE) {
+                    case "ALL":
+                        model.addRow(new Object[]{slt[0], slt[1], slt[2], bool});
+                        break;
+                    case "TODAY":
+                        String currentDate = slt[0];
+                        if (currentDate.equals(currentDat0)) {
+                            model.addRow(new Object[]{currentDat0, slt[1], slt[2], bool});
+                        }   break;
+                    default:
+                        currentDate = slt[0];
+                        if (currentDate.equals(TYPE)) {
+                            model.addRow(new Object[]{currentDat0, slt[1], slt[2], bool});
+                        }
+                }
 
+                read = RSASystem.DECRYPTING((byte[]) inO.readObject(), priv);
+            }
+        }
+        return AutoSave;
+    }
 
     private static void removeAll(DefaultTableModel model) {
         int RC = model.getRowCount();

@@ -5,15 +5,15 @@
  */
 package Organizer_Zadan;
 
-import java.text.SimpleDateFormat;
-import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *Klasa, odpowiadająca za wygląd aplikacji oraz funkcji poszczególnych przycisków 
@@ -330,7 +330,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model));
+            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model,"ALL"));
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
@@ -339,7 +339,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model));
+            AutoSaveCheckBox.setSelected(SaveLoadSystem.load(model,"ALL"));
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }
     }//GEN-LAST:event_formWindowOpened
@@ -350,8 +350,8 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             try {
                 DefaultTableModel model = (DefaultTableModel) jTable.getModel();
                 SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
-            } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | ClassNotFoundException ex) {
-            }
+            } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IOException | IllegalBlockSizeException | BadPaddingException | ClassNotFoundException ex) {
+            } 
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -381,7 +381,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
             WhereField.setText((String) model.getValueAt(ROW, 1));
             WhatField.setText((String) model.getValueAt(ROW, 2));
         } catch (ParseException ex) {
-        }
+        } 
     }//GEN-LAST:event_jTableMouseClicked
 
 
@@ -397,7 +397,8 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
     private void TodayLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodayLoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            SaveLoadSystem.todayLoad(model);
+            SaveLoadSystem.save(model,AutoSaveCheckBox.isSelected());
+            SaveLoadSystem.load(model,"TODAY");
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
         }        
     }//GEN-LAST:event_TodayLoadButtonActionPerformed
@@ -405,7 +406,7 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
-    public static javax.swing.JCheckBox AutoSaveCheckBox;
+    private javax.swing.JCheckBox AutoSaveCheckBox;
     private javax.swing.JButton ChnPssButton;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton LOGOUTButton;
@@ -421,6 +422,6 @@ public class TaskOrganizer_PANEL extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }
