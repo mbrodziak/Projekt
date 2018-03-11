@@ -16,21 +16,19 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
- *
- *
+ *Klasa, odpowiadająca za wygląd aplikacji oraz funkcji poszczególnych przycisków 
+ *@author Mateusz Brodziak, Mateusz Olszewski
  *
  */
-public class OrganizerZadan extends javax.swing.JFrame {
+public class TaskOrganizer_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -4679833238790674239L;
-    //String gdzie[] = new String[100]; 
-    //String co[] = new String[100];
+
 
     /**
      * Creates new form OrganizerZadan
      */
-    public OrganizerZadan() {
+    public TaskOrganizer_PANEL() {
         initComponents();
     }
 
@@ -60,6 +58,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
         AutoSaveCheckBox = new javax.swing.JCheckBox();
         LOGOUTButton = new javax.swing.JButton();
         ChnPssButton = new javax.swing.JButton();
+        TodayLoadButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Organizer Zadań");
@@ -85,7 +84,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Gdzie?", "Co?", "Wykonano?"
+                "Date", "Where?", "What?", "Taken?"
             }
         ) {
             Class[] types = new Class [] {
@@ -103,6 +102,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable.setColumnSelectionAllowed(true);
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
@@ -154,11 +154,11 @@ public class OrganizerZadan extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Gdzie?");
+        jLabel1.setText("Where?");
 
-        jLabel3.setText("Co?");
+        jLabel3.setText("What?");
 
-        jLabel4.setText("Data");
+        jLabel4.setText("Date");
 
         AutoSaveCheckBox.setText("Autosave");
         AutoSaveCheckBox.setToolTipText("");
@@ -178,6 +178,13 @@ public class OrganizerZadan extends javax.swing.JFrame {
             }
         });
 
+        TodayLoadButton.setText("Today Load");
+        TodayLoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TodayLoadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,42 +192,41 @@ public class OrganizerZadan extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WhereField)
-                            .addComponent(WhatField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LOGOUTButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ModifyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DeleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ChnPssButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(AutoSaveCheckBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(LoadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(LoadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TodayLoadButton, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(WhatField)
+                                .addGap(12, 12, 12)
+                                .addComponent(DeleteButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel4)
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ADDButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(LOGOUTButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ChnPssButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(WhereField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ModifyButton)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -232,72 +238,104 @@ public class OrganizerZadan extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(ADDButton))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGap(7, 7, 7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel1)
+                                            .addComponent(WhereField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ADDButton)
+                                        .addGap(29, 29, 29)))
                                 .addGap(3, 3, 3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(WhereField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(ModifyButton)))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DeleteButton)
+                            .addComponent(WhatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(WhatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DeleteButton)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(SaveButton)
-                                    .addComponent(AutoSaveCheckBox))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LoadButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(LOGOUTButton)
-                                    .addComponent(ChnPssButton))))))
+                            .addComponent(SaveButton)
+                            .addComponent(AutoSaveCheckBox))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LoadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TodayLoadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LOGOUTButton)
+                            .addComponent(ChnPssButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala dodać nowe zadania do Organizatora Zadań
+     */
     private void ADDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDButtonActionPerformed
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
-        String date = dFormat.format(jDateChooser.getDate());
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.addRow(new Object[]{date, WhereField.getText(), WhatField.getText()});
+        try {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String date = dFormat.format(jDateChooser.getDate());
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.addRow(new Object[]{date, WhereField.getText(), WhatField.getText()});
+        } catch (NullPointerException e) {
+        }
 
     }//GEN-LAST:event_ADDButtonActionPerformed
-
+    
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala zmodyfikować wybrane zadania 
+     */
     private void ModifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyButtonActionPerformed
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String date = dFormat.format(jDateChooser.getDate());
-        int ROW = jTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.removeRow(ROW);
-        model.insertRow(ROW, new Object[]{date, WhereField.getText(), WhatField.getText()});
+        try {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String date = dFormat.format(jDateChooser.getDate());
+            int ROW = jTable.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.removeRow(ROW);
+            model.insertRow(ROW, new Object[]{date, WhereField.getText(), WhatField.getText()});
+        } catch (NullPointerException e) {
+        }
     }//GEN-LAST:event_ModifyButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda pozwala usuwać wybrane zadania z Organizatora Zadań
+     */
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        int ROW = jTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.removeRow(ROW);
+        try {
+            int ROW = jTable.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            model.removeRow(ROW);
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
 
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda, która wywołuje metodę save z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.save(model)
+     */
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -306,6 +344,12 @@ public class OrganizerZadan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     * Metoda, która wywołuje metodę load z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.load(model)
+     */
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -314,6 +358,10 @@ public class OrganizerZadan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoadButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -322,6 +370,10 @@ public class OrganizerZadan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (AutoSaveCheckBox.isSelected()) {
             try {
@@ -332,20 +384,32 @@ public class OrganizerZadan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void LOGOUTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new LOGIN_PANEL().setVisible(true);
+            new LogIn_PANEL().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_LOGOUTButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void ChnPssButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChnPssButtonActionPerformed
         java.awt.EventQueue.invokeLater(() -> {
-            new CHNPSS().setVisible(true);
+            new ChangePassword_PANEL().setVisible(true);
             
         });
     }//GEN-LAST:event_ChnPssButtonActionPerformed
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         try {
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -358,6 +422,10 @@ public class OrganizerZadan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableMouseClicked
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -365,6 +433,21 @@ public class OrganizerZadan extends javax.swing.JFrame {
             WhereField.setText("");
             WhatField.setText("");
     }//GEN-LAST:event_formMouseClicked
+
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt
+     * Metoda, która wywołuje metodę todayLoad z klasy SaveLoadSystem 
+     * @see SaveLoadSystem.todayLoad(model)
+     */
+    private void TodayLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodayLoadButtonActionPerformed
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            SaveLoadSystem.todayLoad(model);
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
+        }        
+    }//GEN-LAST:event_TodayLoadButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDButton;
@@ -375,6 +458,7 @@ public class OrganizerZadan extends javax.swing.JFrame {
     private javax.swing.JButton LoadButton;
     private javax.swing.JButton ModifyButton;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton TodayLoadButton;
     private javax.swing.JTextField WhatField;
     private javax.swing.JTextField WhereField;
     private com.toedter.calendar.JDateChooser jDateChooser;

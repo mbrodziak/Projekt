@@ -15,16 +15,17 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author MatriX
+ * @author Mateusz Brodziak, Mateusz Olszewski
+ * 
  */
-public class LOGIN_PANEL extends javax.swing.JFrame {
+public class LogIn_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -2226871920361698064L;
 
     /**
      * Creates new form getPassword
      */
-    public LOGIN_PANEL() {
+    public LogIn_PANEL() {
         initComponents();
     }
 
@@ -82,13 +83,17 @@ public class LOGIN_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param evt 
+     */
     private void LOGINButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINButtonActionPerformed
         try {
             char[] pssw = PasswordField.getPassword();
-            char[] pss0 = LOGSystem.getPassword();
+            char[] pss0 = LogSystem.getPassword();
             if (Arrays.equals(pssw, pss0)){
                 java.awt.EventQueue.invokeLater(() -> {
-                    new OrganizerZadan().setVisible(true);
+                    new TaskOrganizer_PANEL().setVisible(true);
                 });
                 this.dispose();
             }

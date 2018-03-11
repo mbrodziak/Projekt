@@ -21,27 +21,51 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author MatriX
+ * @author Mateusz Brodziak, Mateusz Olszewski
+ * 
  */
-public class LOGSystem {
+public class LogSystem {
 
+    /**
+     * Metoda nie przyjmuje żądnych parametrów
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws InvalidKeyException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     */
     static char [] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
         char[] pss0;
         try (ObjectInputStream inP = new ObjectInputStream(new FileInputStream("user.save"))) {
             PrivateKey priv = (PrivateKey) inP.readObject();
             inP.readObject();
-            pss0 = RSA.DECRYPTING((byte[]) inP.readObject(), priv).toCharArray();
+            pss0 = RSASystem.DECRYPTING((byte[]) inP.readObject(), priv).toCharArray();
         }
         return pss0;
             
     }
 
+    /**
+     * Metoda przyjmuje jeden parametr
+     * @param pss0
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     */
     static void setPassword(char[] pss0) throws FileNotFoundException, IOException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         try (ObjectOutputStream outP = new ObjectOutputStream(new FileOutputStream("user.save"))) {
-            Object[] KPP = RSA.GenerateKeys();
+            Object[] KPP = RSASystem.GenerateKeys();
             outP.writeObject(KPP[0]);
             outP.writeObject(KPP[1]);
-            outP.writeObject(RSA.ENCRYPTING(new String (pss0), (PublicKey) KPP[1]));
+            outP.writeObject(RSASystem.ENCRYPTING(new String (pss0), (PublicKey) KPP[1]));
             outP.flush();
         }
     }

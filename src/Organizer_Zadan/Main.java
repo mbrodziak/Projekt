@@ -17,26 +17,39 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author student
+ *@author Mateusz Brodziak, Mateusz Olszewski
+ * 
  */
 public class Main {
 
+    /**
+     * 
+     * @param args
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException
+     * @throws ClassNotFoundException 
+     */
     public static void main(String[] args) throws IOException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException {
         File file = new File("user.save");
         char[] pss = {};
         if (file.createNewFile()) {
             char[] pss0 = {};
-            LOGSystem.setPassword(pss0);
+            LogSystem.setPassword(pss0);
             java.awt.EventQueue.invokeLater(() -> {
-                new OrganizerZadan().setVisible(true);
+                new TaskOrganizer_PANEL().setVisible(true);
             });
-        } else if (Arrays.equals(LOGSystem.getPassword(), pss)) {
+        } else if (Arrays.equals(LogSystem.getPassword(), pss)) {
             java.awt.EventQueue.invokeLater(() -> {
-                new OrganizerZadan().setVisible(true);
+                new TaskOrganizer_PANEL().setVisible(true);
             });
         } else {
             java.awt.EventQueue.invokeLater(() -> {
-                new LOGIN_PANEL().setVisible(true);
+                new LogIn_PANEL().setVisible(true);
             });
         }
     }
