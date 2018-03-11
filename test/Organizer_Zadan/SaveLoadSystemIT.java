@@ -44,25 +44,31 @@ public class SaveLoadSystemIT {
     @Test
     public void testSave() throws Exception {
         System.out.println("save");
-        DefaultTableModel model = null;
+        DefaultTableModel model = new DefaultTableModel(0,4);
+        DefaultTableModel model2 = new DefaultTableModel(0,4);
+        model.addRow(new Object[]{"09-03-2018", "Myslowice", "Zadania", true});
+        model.addRow(new Object[]{"10-03-2018", "Katowice", "Kino", false});
+        model.addRow(new Object[]{"15-03-2018", "Chorzow", "Do tego czasu oddac indeks", false});
         boolean AutoSave = false;
         SaveLoadSystem.save(model, AutoSave);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SaveLoadSystem.load(model2, "ALL");
+        System.out.println(model2.toString());
+        boolean result = model.equals(model2);
+        assertEquals("Nie są równe", true,  result);
     }
 
     /**
      * Test of load method, of class SaveLoadSystem.
      * @throws java.lang.Exception
      */
-    @Test
+    /*    @Test
     public void testLoad() throws Exception {
-        System.out.println("load");
-        DefaultTableModel model = null;
-        String TYPE = "";
-        boolean expResult = false;
-        boolean result = SaveLoadSystem.load(model, TYPE);
-        assertEquals(expResult, result);
-    }
+    System.out.println("load");
+    DefaultTableModel model = null;
+    String TYPE = "";
+    boolean expResult = false;
+    boolean result = SaveLoadSystem.load(model, TYPE);
+    assertEquals(expResult, result);
+    }*/
     
 }
