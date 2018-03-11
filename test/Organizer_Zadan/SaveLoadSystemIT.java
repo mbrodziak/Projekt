@@ -5,6 +5,13 @@
  */
 package Organizer_Zadan;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.table.DefaultTableModel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -39,36 +46,31 @@ public class SaveLoadSystemIT {
     }
 
     /**
-     * Test of save method, of class SaveLoadSystem.
+     * Test of save and load method, of class SaveLoadSystem.
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws javax.crypto.NoSuchPaddingException
+     * @throws java.security.InvalidKeyException
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
+     * @throws javax.crypto.IllegalBlockSizeException
+     * @throws java.lang.ClassNotFoundException
+     * @throws javax.crypto.BadPaddingException
      */
     @Test
-    public void testSave() throws Exception {
-        System.out.println("save");
-        DefaultTableModel model = new DefaultTableModel(0,4);
-        DefaultTableModel model2 = new DefaultTableModel(0,4);
+    public void testSaveLoad() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException, FileNotFoundException, IllegalBlockSizeException, ClassNotFoundException, BadPaddingException {
+        System.out.println("save and load");
+        DefaultTableModel model = new DefaultTableModel(0,4),model2 = new DefaultTableModel(0,4);
         model.addRow(new Object[]{"09-03-2018", "Myslowice", "Zadania", true});
         model.addRow(new Object[]{"10-03-2018", "Katowice", "Kino", false});
         model.addRow(new Object[]{"15-03-2018", "Chorzow", "Do tego czasu oddac indeks", false});
-        boolean AutoSave = false;
-        SaveLoadSystem.save(model, AutoSave);
+        SaveLoadSystem.save(model, false);
         SaveLoadSystem.load(model2, "ALL");
-        System.out.println(model2.toString());
-        boolean result = model.equals(model2);
-        assertEquals("Nie są równe", true,  result);
+        int rowCount = model.getRowCount();
+        int columnCount = model.getColumnCount();
+        for(int row = 0; row < rowCount; row++){
+            for(int column = 0; column < columnCount; column++){
+                assertEquals("Nie sa rowne", model.getValueAt(row, column), model2.getValueAt(row, column));
+            }
+        }    
     }
-
-    /**
-     * Test of load method, of class SaveLoadSystem.
-     * @throws java.lang.Exception
-     */
-    /*    @Test
-    public void testLoad() throws Exception {
-    System.out.println("load");
-    DefaultTableModel model = null;
-    String TYPE = "";
-    boolean expResult = false;
-    boolean result = SaveLoadSystem.load(model, TYPE);
-    assertEquals(expResult, result);
-    }*/
-    
-}
+ }
