@@ -8,6 +8,8 @@ Projekt dotyczący Organizatora Zadan posiadający następujące funkcje:
 7. Widok zadań na dzisiaj
 8. Logowanie
 9. Zmiana hasła
+
 Tak samo jest zapewnione automatyczne odczytywanie, szyfrowanie pliku za pomocą RSA.
-Organizzer zdań wymaga biblioteki jCalendar wykonanego przez Kai Tödter i można znależć to biblioteke na stronie:
+
+Organizer zadań wymaga biblioteki jCalendar wykonanego przez Kai Tödter i można znależć to biblioteke na stronie:
 https://toedter.com/jcalendar/
