@@ -14,7 +14,6 @@ import java.security.PublicKey;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,6 +50,12 @@ public class RSASystemIT {
      * Test of GenerateKeys, ENCRYPTING, DECRYPTING method, of class RSASystem.
      * @throws java.security.NoSuchAlgorithmException
      * @throws javax.crypto.BadPaddingException
+     * @throws java.security.InvalidKeyException
+     * @throws javax.crypto.NoSuchPaddingException
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
+     * @throws javax.crypto.IllegalBlockSizeException
+     * @throws java.lang.ClassNotFoundException
      */
     @Test
     public void testGenerateKeysEncryptingDecrypting() throws NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IOException, FileNotFoundException, IllegalBlockSizeException, ClassNotFoundException {

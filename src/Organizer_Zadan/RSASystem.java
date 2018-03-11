@@ -19,14 +19,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa, pozwalajająca na generowanie kluczy, szyfrowanie i odszyfrowywanie tekstów
+ * Klasa, pozwalajająca na generowanie kluczy, szyfrowanie i odszyfrowywanie ciągu znaków
  * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
 public class RSASystem {
 
-    /**
-     * Metoda nie przyjmuje żadnych parametrów      
+    /**   
      * Metoda generuje klucze prywatne i publiczne 
      * @return klucze prywatne i publiczne w formie Array
      * @throws NoSuchAlgorithmException
@@ -41,11 +40,10 @@ public class RSASystem {
         return KPP;
     }
 
-    /**
-     * Metoda przyjmuje dwa parametry      
-     * Metoda szyfruje podany tekst, za pomocą podanego klucza publicznego
-     * @param tekst
-     * @param pub
+    /**    
+     * Metoda szyfruje podany ciag znakow, za pomocą podanego klucza publicznego
+     * @param tekst podany ciag do zaszyfroania
+     * @param pub klucz publiczny sluzacy do szyfroania danych
      * @return zaszyfrowana forma podanego tekstu
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
@@ -63,9 +61,9 @@ public class RSASystem {
 
     /**
      * Metoda przyjmuje dwa parametry
-     * Metoda odszyfrowywuje tekst, za pomocą klucza prywatnego
-     * @param tekst
-     * @param priv
+     * Metoda odszyfrowywuje ciag bitow, za pomocą klucza prywatnego
+     * @param tekst ciag bitow, ktoey jest zaszyfroana informacja
+     * @param priv klucz prywatny, sluzacy do deszyfracji informacji
      * @return odszyfrowana forma tekstu
      * @throws NoSuchAlgorithmException
      * @throws NoSuchPaddingException

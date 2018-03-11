@@ -20,16 +20,18 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Klasa, odpowiadająca za logowanie użytkownika
- * Sprawdza poprawność wpisanego hasła
+ * Klasa, odpowiadająca za logowanie użytkownika, obecnie sluzy do zapisywania,
+ * oraz pobrania hasla z/do pliku user.save.
+ *
  * @author Mateusz Brodziak, Mateusz Olszewski
- * 
+ *
  */
 public class LogSystem {
 
     /**
-     * Metoda nie przyjmuje żądnych parametrów
-     * @return hasło
+     * Metoda sluzaca do odczytywania hasla z pliku user.save
+     *
+     * @return odczytane haslo
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
@@ -39,7 +41,7 @@ public class LogSystem {
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */
-    public static char [] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
+    public static char[] getPassword() throws FileNotFoundException, IOException, ClassNotFoundException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         char[] pss0;
         try (ObjectInputStream inP = new ObjectInputStream(new FileInputStream("user.save"))) {
             PrivateKey priv = (PrivateKey) inP.readObject();
@@ -47,13 +49,14 @@ public class LogSystem {
             pss0 = RSASystem.DECRYPTING((byte[]) inP.readObject(), priv).toCharArray();
         }
         return pss0;
-            
+
     }
 
     /**
-     * Metoda przyjmuje jeden parametr
-     * Metoda pozwala ustawić hasło 
-     * @param pss0
+     * Metoda, zapisuje hasło do pliku, oraz generuje klucze służace do
+     * szyfrowania
+     *
+     * @param pss0 hasło do zapisuw formie char[]
      * @throws FileNotFoundException
      * @throws IOException
      * @throws NoSuchAlgorithmException
@@ -67,7 +70,7 @@ public class LogSystem {
             Object[] KPP = RSASystem.GenerateKeys();
             outP.writeObject(KPP[0]);
             outP.writeObject(KPP[1]);
-            outP.writeObject(RSASystem.ENCRYPTING(new String (pss0), (PublicKey) KPP[1]));
+            outP.writeObject(RSASystem.ENCRYPTING(new String(pss0), (PublicKey) KPP[1]));
             outP.flush();
         }
     }

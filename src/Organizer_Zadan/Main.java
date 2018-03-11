@@ -23,10 +23,8 @@ import javax.crypto.NoSuchPaddingException;
 public class Main {
 
     /**
-     * Głowna metoda
-     * Przyjmuje jeden parametr
-     * Uruchamia aplikacje
-     * W zależności czy istnieje plik o rozszerzeniu "save", jest ustawiane hasło
+     * Głowna metoda uruchamiająca aplikacje, zalezaca od stanu pliku user.save
+     * oraz posiadani hasla
      * @param args
      * @throws IOException
      * @throws FileNotFoundException

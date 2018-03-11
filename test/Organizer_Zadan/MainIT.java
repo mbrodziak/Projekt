@@ -5,12 +5,18 @@
  */
 package Organizer_Zadan;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -39,9 +45,17 @@ public class MainIT {
 
     /**
      * Test of main method, of class Main.
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.security.InvalidKeyException
+     * @throws javax.crypto.NoSuchPaddingException
+     * @throws javax.crypto.IllegalBlockSizeException
+     * @throws javax.crypto.BadPaddingException
+     * @throws java.lang.ClassNotFoundException
      */
     @Test
-    public void testMain() throws Exception {
+    public void testMain() throws IOException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException{
         System.out.println("main");
         String[] args = {""};
         Main.main(args);
