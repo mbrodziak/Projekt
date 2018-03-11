@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 /**
  *
@@ -38,28 +39,15 @@ public class LogSystemIT {
     }
 
     /**
-     * Test of getPassword method, of class LogSystem.
+     * Test of setPassword and getPassowrd method, of class LogSystem.
+     * @throws java.lang.Exception
      */
     @Test
-    public void testGetPassword() throws Exception {
-        System.out.println("getPassword");
-        char[] expResult = null;
-        char[] result = LogSystem.getPassword();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSetGetPassword() throws Exception {
+        System.out.println("setPassword and getPassword");
+        char[] pass = {'#', '$', '%', '^', '^', '&', '&', '*'};
+        LogSystem.setPassword(pass);
+        char[] passw = LogSystem.getPassword();
+        assertEquals("Hasla nie sa takie same", true, Arrays.equals(pass, passw));        
     }
-
-    /**
-     * Test of setPassword method, of class LogSystem.
-     */
-    @Test
-    public void testSetPassword() throws Exception {
-        System.out.println("setPassword");
-        char[] pss0 = null;
-        LogSystem.setPassword(pss0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
-}
+ }
