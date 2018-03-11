@@ -14,16 +14,17 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
+ * Klasa panelu logowania, która określa wygląd aplikacji.
  *
  * @author Mateusz Brodziak, Mateusz Olszewski
- * 
+ *
  */
 public class LogIn_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -2226871920361698064L;
 
     /**
-     * Creates new form getPassword
+     * Inicjuje komponenty panelu
      */
     public LogIn_PANEL() {
         initComponents();
@@ -43,12 +44,12 @@ public class LogIn_PANEL extends javax.swing.JFrame {
         LOGINButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Panel do Logowania");
+        setTitle("Panel Logowania");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("LOGIN PANEL");
+        jLabel1.setText("PANEL LOGOWANIA");
 
-        LOGINButton.setText("LOG IN");
+        LOGINButton.setText("Zaloguj");
         LOGINButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LOGINButtonActionPerformed(evt);
@@ -60,13 +61,15 @@ public class LogIn_PANEL extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LOGINButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(PasswordField)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LOGINButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,15 +86,12 @@ public class LogIn_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void LOGINButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINButtonActionPerformed
         try {
             char[] pssw = PasswordField.getPassword();
             char[] pss0 = LogSystem.getPassword();
-            if (Arrays.equals(pssw, pss0)){
+            if (Arrays.equals(pssw, pss0)) {
                 java.awt.EventQueue.invokeLater(() -> {
                     new TaskOrganizer_PANEL().setVisible(true);
                 });

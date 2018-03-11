@@ -16,14 +16,15 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- *
- *@author Mateusz Brodziak, Mateusz Olszewski
+ * Głowna klasa aplikacji
+ * @author Mateusz Brodziak, Mateusz Olszewski
  * 
  */
 public class Main {
 
     /**
-     * 
+     * Głowna metoda uruchamiająca aplikacje, zalezaca od stanu pliku user.save
+     * oraz posiadani hasla
      * @param args
      * @throws IOException
      * @throws FileNotFoundException

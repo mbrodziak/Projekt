@@ -14,16 +14,16 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
+ * Klasa panelu zmiany hasła, która określa wygląd aplikacji.
  *
  * @author Mateusz Brodziak, Mateusz Olszewski
- * 
  */
 public class ChangePassword_PANEL extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 4898501724548726505L;
 
     /**
-     * Creates new form CHNPSS
+     * Inicjuje komponenty panelu
      */
     public ChangePassword_PANEL() {
         initComponents();
@@ -45,12 +45,13 @@ public class ChangePassword_PANEL extends javax.swing.JFrame {
         ChangeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Zmiana hasła");
 
-        jLabel1.setText("Old Password");
+        jLabel1.setText("Stare Hasło");
 
-        jLabel2.setText("New Password");
+        jLabel2.setText("Nowe Hasło");
 
-        ChangeButton.setText("Change");
+        ChangeButton.setText("Zmień");
         ChangeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChangeButtonActionPerformed(evt);
@@ -63,14 +64,14 @@ public class ChangePassword_PANEL extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(OldPssField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NewPssField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ChangeButton)
@@ -98,10 +99,7 @@ public class ChangePassword_PANEL extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Metoda przyjmuje jeden parametr
-     * @param evt 
-     */
+
     private void ChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeButtonActionPerformed
         try {
             if (Arrays.equals(OldPssField.getPassword(), LogSystem.getPassword())) {
@@ -110,7 +108,7 @@ public class ChangePassword_PANEL extends javax.swing.JFrame {
             }
         } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException ex) {
         }
-        
+
     }//GEN-LAST:event_ChangeButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
